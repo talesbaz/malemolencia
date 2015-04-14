@@ -1,0 +1,8 @@
+{
+	"uuid": "malemolencia@malemolente",
+	"name": "Malemolencia",
+	"extension-id": "malemolencia-menu",
+  "gettext-domain": "gnome-shell-extensions",
+	"description": "Agrupador de atalhos.",
+	"shell-version": ["3.4","3.4.1","3.5","3.6","3.8","3.10","3.10.4"]
+}
