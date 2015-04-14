@@ -1,0 +1,16 @@
+.containerIcone {
+	width: 40px;
+}
+
+.itemMenu {
+  font-weight: bold;
+  padding: 0.5em;
+  margin: 1em;
+  width: 200px;
+  border: 0.1em solid #333;
+}
+
+.malemolenciaIcone {
+	text-align: center;
+	font-weight: bold;
+}
