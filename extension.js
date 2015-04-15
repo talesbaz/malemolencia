@@ -31,6 +31,12 @@ let configuracao = {
   url_redmine : 'http://redmine.dbseller.com.br:8888/search?q=',
 
   /**
+   * Define url para o gerador de ambientes
+   * @type {String}
+   */
+  url_gerador : 'http://ambientes.dbseller.com.br/?tag=',
+
+  /**
    * Define o icone que ficará no dock
    * @see http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
    * @type {String}
@@ -78,10 +84,12 @@ const Malemolente = new Lang.Class({
     this.criaSubMenu();
     this.criaMenu();
     this.adicionaSeparador();
-    this.opcaoInput();
+    this.opcaoInputIssue();
+    this.adicionaSeparador();
+    this.opcaoInputGerador();
   },
 
-  opcaoInput: function(){
+  opcaoInputIssue: function(){
 
     let bottomSection = new PopupMenu.PopupMenuSection({style_class : 'item'});
     let self = this;
@@ -113,6 +121,41 @@ const Malemolente = new Lang.Class({
     });
 
     bottomSection.actor.add_actor(this.oInputIssue);
+    this.menu.addMenuItem(bottomSection);
+  },
+
+  opcaoInputGerador: function(){
+
+    let bottomSection = new PopupMenu.PopupMenuSection({style_class : 'item'});
+    let self = this;
+
+    this.oInputGerador = new St.Entry({ name: "inputGerador",
+                                        hint_text: _("Gerar Ambiente..."),
+                                        track_hover: true,
+                                        can_focus: true,
+                                        style_class: "itemMenu" });
+
+    let inputGerador = this.oInputGerador.clutter_text;
+    inputGerador.set_max_length(40);
+    inputGerador.connect('key-press-event', function(o,e){
+
+      let teclaPressionada = e.get_key_symbol();
+
+      if (teclaPressionada == asciiTeclaEnter ||
+          teclaPressionada == asciiTeclaReturn) {
+
+        try {
+
+          GLib.spawn_command_line_async( self.configuracao.navegador + self.configuracao.url_gerador + o.get_text() );
+          inputGerador.text = '';
+          self.menu.close();
+        } catch(e) {
+          Main.notify("Erro ao Executar comando.");
+        }
+      }
+    });
+
+    bottomSection.actor.add_actor(this.oInputGerador);
     this.menu.addMenuItem(bottomSection);
   },
 
