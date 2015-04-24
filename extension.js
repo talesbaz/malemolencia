@@ -37,7 +37,7 @@ let configuracao = {
   url_gerador : 'http://ambientes.dbseller.com.br/?tag=',
 
   /**
-   * Define o icone que ficará no dock
+   * Define o icone do dock
    * @see http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
    * @type {String}
    * @default emblem-system || emblem-favorite
@@ -45,7 +45,7 @@ let configuracao = {
   iconeDock : 'emblem-system',
 
   /**
-   * Define o tamanho do icone que ficará no dock
+   * Define o tamanho do icone do dock
    * @type integer
    * @default 20
    */
@@ -64,7 +64,7 @@ const Malemolente = new Lang.Class({
     this.configuracao = configuracao;
     this.configuracao.navegador = this.configuracao.navegador + ' ';
 
-    this.arquivoItens = GLib.get_home_dir() + "/itens.json";
+    this.arquivoItens = GLib.get_home_dir() + "/.config/itens.json";
 
     this.poolBotao = new St.Label({text:_("M+")});
     this.poolBotao.add_style_class_name("malemolenciaIcone");
